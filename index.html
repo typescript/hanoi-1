@@ -7,100 +7,9 @@
 
 	<link rel="stylesheet" type="text/css" href="app.css">
 
-	<script type="text/javascript" src="torre.js"></script>
-
-	<script type="text/javascript">
-
-		window.onload = function() {
-
-			var canvas_container = document.getElementById('canvas_container');
-			var hanoi_canvas = document.getElementById('window_hanoi');
-			var hanoi_context = hanoi_canvas.getContext('2d');
-
-			window.addEventListener('resize', resizeCanvas, false);
-
-			/*
-			 * alterando a altura e largura do quadro de desenho dinamicamente a cada
-			 * redimensionamento de tela (incompleto)
-			 */
-			function resizeCanvas() {
-
-				hanoi_canvas.width = document.getElementById('canvas_container').offsetWidth;
-
-				// hanoi_canvas.height = document.getElementById('canvas_container').offsetHeight;
-
-				// definindo altura do quadro por proporção 16:9
-				hanoi_canvas.height = hanoi_canvas.width * 0.5625;
-
-				// modificar para chamar todas as funções de 
-				// desenharObjetos();
-				desenharTorres();
-			}
-
-			resizeCanvas();
-
-			/*var x = 20;
-			var y = 100;
-			var raio = 5;*/
-
-			//desenharTorres();
-
-			/*requestAnimationFrame(mexerBola);
-
-			function mexerBola() {
-				
-				hanoi_context.clearRect(0, 0, hanoi_canvas.width, hanoi_canvas.height);
-				desenharTorres();
-
-				hanoi_context.beginPath();
-				hanoi_context.arc(x, y, raio, 0, Math.PI*2);
-				hanoi_context.fill();
-
-				x+=10;
-				
-				requestAnimationFrame(mexerBola);
-			}*/
-
-			function desenharTorres() {
-
-				// Se mudasse tudo proporcionalmente sem valores constantes seria show!!
-				var comprimento_haste_torre = 10;
-				var altura_haste_torre = 200;
-				var d_haste_torre_topo = 100;
-				var d_haste_torre_esquerda = 200;
-
-				var torreA = new Torre(
-					comprimento_haste_torre,
-					altura_haste_torre,
-					d_haste_torre_topo,
-					d_haste_torre_esquerda
-				);
-				torreA.desenhar(hanoi_context);
-
-				var torreB = new Torre(
-					comprimento_haste_torre,
-					altura_haste_torre,
-					d_haste_torre_topo,
-					(2*d_haste_torre_esquerda) + comprimento_haste_torre
-				);
-				torreB.desenhar(hanoi_context);
-
-				var torreB = new Torre(
-					comprimento_haste_torre,
-					altura_haste_torre,
-					d_haste_torre_topo,
-					(3*d_haste_torre_esquerda) + (2*comprimento_haste_torre)
-				);
-				torreB.desenhar(hanoi_context);
-
-				for (var i = 0; i < 1; i++) {
-
-				}
-			}
-
-		}
-
-	</script>
+	<script type="text/javascript" src="js/torre.js"></script>
+	<script type="text/javascript" src="js/disco.js"></script>
+	<script type="text/javascript" src="js/scripts.js" defer="defer"></script>
 
 </head>
 
@@ -109,6 +18,11 @@
 <div id="canvas_container">
 	<canvas id="window_hanoi"></canvas>
 </div>
+
+<form id="form_hanoi">
+	<input name="in_n_discos" type="number">
+	<input id="btn_n_discos" type="button">
+</form>
 
 </body>
 </html>
