@@ -3,6 +3,11 @@ var canvas_container = document.getElementById('canvas_container');
 var hanoi_canvas = document.getElementById('window_hanoi');
 var hanoi_context = hanoi_canvas.getContext('2d');
 
+var comprimento_haste_torre;
+var altura_haste_torre;
+var d_haste_torre_topo;
+var d_haste_torre_esquerda;
+
 var n_discos = 0;
 
 window.addEventListener('resize', resizeCanvas, false);
@@ -20,18 +25,17 @@ function resizeCanvas() {
 	// definindo altura do quadro por proporção 16:9
 	hanoi_canvas.height = hanoi_canvas.width * 0.5625;
 
+	altura_haste_torre = hanoi_canvas.height / 2;
+	comprimento_haste_torre = altura_haste_torre * 0.05;
+	d_haste_torre_topo = altura_haste_torre / 2;
+	d_haste_torre_esquerda = (hanoi_canvas.width - (comprimento_haste_torre * 3)) / 4;
+
 	desenharObjetos();
 }
 
 function desenharObjetos() {
 
 	hanoi_context.clearRect(0, 0, hanoi_canvas.width, hanoi_canvas.height);
-
-	// Se mudasse tudo proporcionalmente sem valores constantes seria show!!
-	var comprimento_haste_torre = 10;
-	var altura_haste_torre = 200;
-	var d_haste_torre_topo = 100;
-	var d_haste_torre_esquerda = 200;
 
 	var torreA = new Torre(
 		comprimento_haste_torre,
@@ -56,8 +60,6 @@ function desenharObjetos() {
 		(3*d_haste_torre_esquerda) + (2*comprimento_haste_torre)
 	);
 	torreB.desenhar(hanoi_context);
-
-	hanoi_context.fillStyle = "black";
 
 	// testeeeess dos discos
 
