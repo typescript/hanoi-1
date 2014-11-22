@@ -5,20 +5,45 @@
 	<meta charset="utf-8">
 	<title>Torres de Hanói</title>
 
+	<link rel="stylesheet" type="text/css" href="app.css">
+
 	<script type="text/javascript" src="torre.js"></script>
 
 	<script type="text/javascript">
 
 		window.onload = function() {
 
+			var canvas_container = document.getElementById('canvas_container');
 			var hanoi_canvas = document.getElementById('window_hanoi');
 			var hanoi_context = hanoi_canvas.getContext('2d');
+
+			window.addEventListener('resize', resizeCanvas, false);
+
+			/*
+			 * alterando a altura e largura do quadro de desenho dinamicamente a cada
+			 * redimensionamento de tela (incompleto)
+			 */
+			function resizeCanvas() {
+
+				hanoi_canvas.width = document.getElementById('canvas_container').offsetWidth;
+
+				// hanoi_canvas.height = document.getElementById('canvas_container').offsetHeight;
+
+				// definindo altura do quadro por proporção 16:9
+				hanoi_canvas.height = hanoi_canvas.width * 0.5625;
+
+				// modificar para chamar todas as funções de 
+				// desenharObjetos();
+				desenharTorres();
+			}
+
+			resizeCanvas();
 
 			/*var x = 20;
 			var y = 100;
 			var raio = 5;*/
 
-			desenharTorres();
+			//desenharTorres();
 
 			/*requestAnimationFrame(mexerBola);
 
@@ -38,6 +63,7 @@
 
 			function desenharTorres() {
 
+				// Se mudasse tudo proporcionalmente sem valores constantes seria show!!
 				var comprimento_haste_torre = 10;
 				var altura_haste_torre = 200;
 				var d_haste_torre_topo = 100;
@@ -71,17 +97,13 @@
 
 	</script>
 
-	<style type="text/css">
-		#window_hanoi {
-			border: solid 1px #ddd;
-		}
-	</style>
 </head>
 
 <body>
 
-<canvas id="window_hanoi" width="860" height="400"></canvas>
-
+<div id="canvas_container">
+	<canvas id="window_hanoi"></canvas>
+</div>
 
 </body>
 </html>
