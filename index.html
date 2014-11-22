@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Torres de Hanói</title>
+
+	<script type="text/javascript" src="torre.js"></script>
+
+	<script type="text/javascript">
+
+		window.onload = function() {
+
+			var hanoi_canvas = document.getElementById('window_hanoi');
+			var hanoi_context = hanoi_canvas.getContext('2d');
+
+			/*var x = 20;
+			var y = 100;
+			var raio = 5;*/
+
+			desenharTorres();
+
+			/*requestAnimationFrame(mexerBola);
+
+			function mexerBola() {
+				
+				hanoi_context.clearRect(0, 0, hanoi_canvas.width, hanoi_canvas.height);
+				desenharTorres();
+
+				hanoi_context.beginPath();
+				hanoi_context.arc(x, y, raio, 0, Math.PI*2);
+				hanoi_context.fill();
+
+				x+=10;
+				
+				requestAnimationFrame(mexerBola);
+			}*/
+
+			function desenharTorres() {
+
+				var comprimento_haste_torre = 10;
+				var altura_haste_torre = 200;
+				var d_haste_torre_topo = 100;
+				var d_haste_torre_esquerda = 200;
+
+				var torreA = new Torre(
+					comprimento_haste_torre,
+					altura_haste_torre,
+					d_haste_torre_topo,
+					d_haste_torre_esquerda
+				);
+				torreA.desenhar(hanoi_context);
+
+				var torreB = new Torre(
+					comprimento_haste_torre,
+					altura_haste_torre,
+					d_haste_torre_topo,
+					(2*d_haste_torre_esquerda) + comprimento_haste_torre
+				);
+				torreB.desenhar(hanoi_context);
+
+				var torreB = new Torre(
+					comprimento_haste_torre,
+					altura_haste_torre,
+					d_haste_torre_topo,
+					(3*d_haste_torre_esquerda) + (2*comprimento_haste_torre)
+				);
+				torreB.desenhar(hanoi_context);
+			}
+		}
+
+	</script>
+
+	<style type="text/css">
+		#window_hanoi {
+			border: solid 1px #ddd;
+		}
+	</style>
+</head>
+
+<body>
+
+<canvas id="window_hanoi" width="860" height="400"></canvas>
+
+
+</body>
+</html>
