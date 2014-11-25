@@ -8,7 +8,7 @@ var altura_haste_torre;
 var d_haste_torre_topo;
 var d_haste_torre_esquerda;
 
-var n_discos = 0;
+var n_discos = 14;
 
 window.addEventListener('resize', resizeCanvas, false);
 
@@ -16,7 +16,7 @@ resizeCanvas();
 
 /*
  * alterando a altura e largura do quadro de desenho dinamicamente a cada
- * redimensionamento de tela (incompleto)
+ * redimensionamento de tela
  */
 function resizeCanvas() {
 
@@ -25,6 +25,7 @@ function resizeCanvas() {
 	// definindo altura do quadro por proporção 16:9
 	hanoi_canvas.height = hanoi_canvas.width * 0.5625;
 
+	// torres que se adaptam
 	altura_haste_torre = hanoi_canvas.height / 2;
 	comprimento_haste_torre = altura_haste_torre * 0.05;
 	d_haste_torre_topo = altura_haste_torre / 2;
@@ -38,28 +39,31 @@ function desenharObjetos() {
 	hanoi_context.clearRect(0, 0, hanoi_canvas.width, hanoi_canvas.height);
 
 	var torreA = new Torre(
+		hanoi_context,
 		comprimento_haste_torre,
 		altura_haste_torre,
 		d_haste_torre_topo,
 		d_haste_torre_esquerda
 	);
-	torreA.desenhar(hanoi_context);
+	torreA.desenhar();
 
 	var torreB = new Torre(
+		hanoi_context,
 		comprimento_haste_torre,
 		altura_haste_torre,
 		d_haste_torre_topo,
 		(2*d_haste_torre_esquerda) + comprimento_haste_torre
 	);
-	torreB.desenhar(hanoi_context);
+	torreB.desenhar();
 
 	var torreB = new Torre(
+		hanoi_context,
 		comprimento_haste_torre,
 		altura_haste_torre,
 		d_haste_torre_topo,
 		(3*d_haste_torre_esquerda) + (2*comprimento_haste_torre)
 	);
-	torreB.desenhar(hanoi_context);
+	torreB.desenhar();
 
 	// testeeeess dos discos
 
@@ -71,6 +75,7 @@ function desenharObjetos() {
 	if (n_discos <= 10) {
 		altura_disco = (torreA.haste["altura"]*0.95) / 10;
 	} else {
+		if (n_discos > 15) { n_discos = 15; }
 		altura_disco = (torreA.haste["altura"]*0.95) / n_discos;
 	}
 
@@ -82,17 +87,22 @@ function desenharObjetos() {
 	    	cor = "0" + color;
 	    }
 
+	    if (cor == '0') {
+	    	cor = "000000";
+	    }
+
 	    cor = "#" + cor.toString(16);
 
 		discos[i] = new Disco(
+			hanoi_context,
 			(torreA.base["comprimento"] / n_discos) * (n_discos-i),
 			altura_disco,
-			150,
-			torreA.base["d_topo"] - (i+1) * altura_disco,
+			torreA.base["d_esquerda"] + (((torreA.base["comprimento"] / n_discos)*(i)) / 2),
+			torreA.base["d_topo"] - ((i+1) * altura_disco),
 			cor
 		);
 
-		discos[i].desenhar(hanoi_context);
+		discos[i].desenhar();
 	}
 
 

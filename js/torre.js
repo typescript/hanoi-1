@@ -4,7 +4,10 @@
  */
 
 // Método Construtor
-function Torre(comprimento_torre, altura_haste_torre, d_haste_torre_topo, d_haste_torre_esquerda) {
+function Torre(context, comprimento_torre, altura_haste_torre, d_haste_torre_topo, d_haste_torre_esquerda, qtd_discos) {
+
+	this.context = context,
+	this.qtd_discos = qtd_discos,
 
 	this.haste = {
 		comprimento: comprimento_torre,
@@ -24,12 +27,12 @@ function Torre(comprimento_torre, altura_haste_torre, d_haste_torre_topo, d_hast
 // Métodos
 Torre.prototype = {
 	
-	desenhar: function(context) {
+	desenhar: function() {
 
 		/*
 		 * Estilizando as hastes
 		 */
-		var rect_gradiente = context.createLinearGradient(
+		var rect_gradiente = this.context.createLinearGradient(
 			this.haste["d_esquerda"], 
 			this.haste["d_topo"], 
 			this.haste["d_esquerda"] + this.haste["comprimento"],
@@ -39,9 +42,9 @@ Torre.prototype = {
 		rect_gradiente.addColorStop(0, "#5f3c24");
 		rect_gradiente.addColorStop(1, "#bc8764");
 
-		context.fillStyle = rect_gradiente;
+		this.context.fillStyle = rect_gradiente;
 
-		context.fillRect(
+		this.context.fillRect(
 			this.haste["d_esquerda"], 
 			this.haste["d_topo"], 
 			this.haste["comprimento"],
@@ -51,9 +54,9 @@ Torre.prototype = {
 		/*
 		 * Estilizando as bases
 		 */
-		context.fillStyle = '#5f3c24';
+		this.context.fillStyle = '#5f3c24';
 
-		context.fillRect(
+		this.context.fillRect(
 			this.base["d_esquerda"],
 			this.base["d_topo"],
 			this.base["comprimento"],

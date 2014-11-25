@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<title>Torres de Hanói</title>
 
-	<link rel="stylesheet" type="text/css" href="app.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/app.css">
 
 	<script type="text/javascript" src="js/torre.js"></script>
 	<script type="text/javascript" src="js/disco.js"></script>
@@ -15,15 +16,23 @@
 
 <body>
 
-<div id="canvas_container">
-	<canvas id="window_hanoi"></canvas>
+<div class="container">
+	<div class="row">
+
+		<div id="canvas_container" class="col-md-8">
+			<canvas id="window_hanoi"></canvas>
+		</div>
+
+		<div class="col-md-4">
+			<form id="form_hanoi">
+				<input name="in_n_discos" type="number">
+
+				<input id="btn_n_discos" type="button" value="gerar discos">
+			</form>
+		</div>
+
+	</div>
 </div>
-
-<form id="form_hanoi">
-	<input name="in_n_discos" type="number">
-
-	<input id="btn_n_discos" type="button" value="gerar discos">
-</form>
 
 </body>
 </html>
