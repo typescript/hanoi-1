@@ -4,24 +4,24 @@
  */
 
 // Método Construtor
-function Torre(context, comprimento_torre, altura_haste_torre, d_haste_torre_topo, d_haste_torre_esquerda, qtd_discos) {
+function Torre(context, x_haste, y_haste, comprimento_haste, altura_haste, qtd_discos) {
 
-	this.context = context,
-	this.qtd_discos = qtd_discos,
+	this.context = context;
+	this.qtd_discos = qtd_discos;
 
 	this.haste = {
-		comprimento: comprimento_torre,
-		altura: altura_haste_torre,
-		d_topo: d_haste_torre_topo,
-		d_esquerda: d_haste_torre_esquerda,
-	},
+		x: x_haste,
+		y: y_haste,
+		comprimento: comprimento_haste,
+		altura: altura_haste
+	};
 	
 	this.base = {
+		x: this.haste["x"] - (((this.haste["altura"] * 0.8) - this.haste["comprimento"])/2),
+		y: this.haste["y"] + this.haste["altura"],
 		comprimento: this.haste["altura"] * 0.8,
-		altura: this.haste["comprimento"] * 1.5,
-		d_topo: this.haste["d_topo"] + this.haste["altura"],
-		d_esquerda: this.haste["d_esquerda"] - (((this.haste["altura"] * 0.8) - this.haste["comprimento"])/2)
-	}
+		altura: this.haste["comprimento"] * 1.5
+	};
 }
 
 // Métodos
@@ -33,10 +33,10 @@ Torre.prototype = {
 		 * Estilizando as hastes
 		 */
 		var rect_gradiente = this.context.createLinearGradient(
-			this.haste["d_esquerda"], 
-			this.haste["d_topo"], 
-			this.haste["d_esquerda"] + this.haste["comprimento"],
-			this.haste["d_topo"] + this.haste["altura"]
+			this.haste["x"], 
+			this.haste["y"], 
+			this.haste["x"] + this.haste["comprimento"],
+			this.haste["y"] + this.haste["altura"]
 		);
 
 		rect_gradiente.addColorStop(0, "#5f3c24");
@@ -45,8 +45,8 @@ Torre.prototype = {
 		this.context.fillStyle = rect_gradiente;
 
 		this.context.fillRect(
-			this.haste["d_esquerda"], 
-			this.haste["d_topo"], 
+			this.haste["x"], 
+			this.haste["y"], 
 			this.haste["comprimento"],
 			this.haste["altura"]
 		);
@@ -57,8 +57,8 @@ Torre.prototype = {
 		this.context.fillStyle = '#5f3c24';
 
 		this.context.fillRect(
-			this.base["d_esquerda"],
-			this.base["d_topo"],
+			this.base["x"],
+			this.base["y"],
 			this.base["comprimento"],
 			this.base["altura"]
 		);

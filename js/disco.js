@@ -4,14 +4,16 @@
  */
 
 // Método Construtor
-function Disco(context, comprimento_disco, altura_disco, x_atual, y_atual, cor) {
+function Disco(context, x, y, comprimento, altura, cor, vel_x, vel_y) {
 
 	this.context = context;
-	this.comprimento = comprimento_disco,
-	this.altura = altura_disco,
-	this.x_atual = x_atual,
-	this.y_atual = y_atual,
-	this.cor = cor
+	this.x = x;
+	this.y = y;
+	this.comprimento = comprimento;
+	this.altura = altura;
+	this.cor = cor;
+	this.vel_x = vel_x;
+	this.vel_y = vel_y;
 
 }
 
@@ -23,11 +25,12 @@ Disco.prototype = {
 		this.context.fillStyle = this.cor;
 
 		this.context.fillRect(
-			this.x_atual,
-			this.y_atual,
+			this.x,
+			this.y,
 			this.comprimento,
 			this.altura
 		);
+
 	}
 	
 }

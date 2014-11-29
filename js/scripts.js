@@ -3,12 +3,12 @@ var canvas_container = document.getElementById('canvas_container');
 var hanoi_canvas = document.getElementById('window_hanoi');
 var hanoi_context = hanoi_canvas.getContext('2d');
 
-var comprimento_haste_torre;
-var altura_haste_torre;
-var d_haste_torre_topo;
-var d_haste_torre_esquerda;
+var comprimento_haste;
+var altura_haste;
+var x_haste_A;
+var y_haste_A;
 
-var n_discos = 14;
+var n_discos = 5;
 
 window.addEventListener('resize', resizeCanvas, false);
 
@@ -26,10 +26,10 @@ function resizeCanvas() {
 	hanoi_canvas.height = hanoi_canvas.width * 0.5625;
 
 	// torres que se adaptam
-	altura_haste_torre = hanoi_canvas.height / 2;
-	comprimento_haste_torre = altura_haste_torre * 0.05;
-	d_haste_torre_topo = altura_haste_torre / 2;
-	d_haste_torre_esquerda = (hanoi_canvas.width - (comprimento_haste_torre * 3)) / 4;
+	altura_haste = hanoi_canvas.height / 2;
+	comprimento_haste = altura_haste * 0.05;
+	x_haste_A = (hanoi_canvas.width - (comprimento_haste * 3)) / 4;
+	y_haste_A = altura_haste / 2;
 
 	desenharObjetos();
 }
@@ -40,32 +40,30 @@ function desenharObjetos() {
 
 	var torreA = new Torre(
 		hanoi_context,
-		comprimento_haste_torre,
-		altura_haste_torre,
-		d_haste_torre_topo,
-		d_haste_torre_esquerda
+		x_haste_A,
+		y_haste_A,		
+		comprimento_haste,
+		altura_haste
 	);
 	torreA.desenhar();
 
 	var torreB = new Torre(
 		hanoi_context,
-		comprimento_haste_torre,
-		altura_haste_torre,
-		d_haste_torre_topo,
-		(2*d_haste_torre_esquerda) + comprimento_haste_torre
+		(2 * x_haste_A) + comprimento_haste,
+		y_haste_A,		
+		comprimento_haste,
+		altura_haste
 	);
 	torreB.desenhar();
 
-	var torreB = new Torre(
+	var torreC = new Torre(
 		hanoi_context,
-		comprimento_haste_torre,
-		altura_haste_torre,
-		d_haste_torre_topo,
-		(3*d_haste_torre_esquerda) + (2*comprimento_haste_torre)
+		(3 * x_haste_A) + (2 * comprimento_haste),
+		y_haste_A,
+		comprimento_haste,
+		altura_haste		
 	);
-	torreB.desenhar();
-
-	// testeeeess dos discos
+	torreC.desenhar();
 
 	var cor_branca = Math.pow(256, 3) - 1;
 	var cor;
@@ -92,21 +90,21 @@ function desenharObjetos() {
 	    }
 
 	    cor = "#" + cor.toString(16);
+	    var x = torreA.base["x"] + (((torreA.base["comprimento"] / n_discos)*(i)) / 2);
+	    var y = torreA.base["y"] - ((i+1) * altura_disco);
 
 		discos[i] = new Disco(
 			hanoi_context,
+			x,
+			y,
 			(torreA.base["comprimento"] / n_discos) * (n_discos-i),
 			altura_disco,
-			torreA.base["d_esquerda"] + (((torreA.base["comprimento"] / n_discos)*(i)) / 2),
-			torreA.base["d_topo"] - ((i+1) * altura_disco),
 			cor
 		);
 
 		discos[i].desenhar();
 	}
-
-
-	// testeeeess				
+			
 }
 
 document.getElementById('form_hanoi').onsubmit = function() {
