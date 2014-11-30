@@ -8,8 +8,11 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/torre.js"></script>
 	<script type="text/javascript" src="js/disco.js"></script>
+	<script type="text/javascript" src="js/animacao.js"></script>
+	<script type="text/javascript" src="js/hanoi.js"></script>
 	<script type="text/javascript" src="js/scripts.js" defer="defer"></script>
 
 </head>
@@ -19,8 +22,17 @@
 <div class="container">
 	<div class="row">
 
-		<div id="canvas_container" class="col-md-8">
-			<canvas id="window_hanoi"></canvas>
+		<div class="col-md-8">
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Simulação Torres de Hanói
+				</div>
+				<div id="canvas_container" class="panel-body">
+					<canvas id="hanoi_canvas"></canvas>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="col-md-4">

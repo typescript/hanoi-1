@@ -17,9 +17,14 @@ function Torre(context, x_haste, y_haste, comprimento_haste, altura_haste, qtd_d
 	};
 	
 	this.base = {
+		// Centraliando a base da torre
 		x: this.haste["x"] - (((this.haste["altura"] * 0.8) - this.haste["comprimento"])/2),
+		
 		y: this.haste["y"] + this.haste["altura"],
+
+		// 80% da altura da haste
 		comprimento: this.haste["altura"] * 0.8,
+		
 		altura: this.haste["comprimento"] * 1.5
 	};
 }
@@ -64,4 +69,4 @@ Torre.prototype = {
 		);
 	}
 
-};
+}
