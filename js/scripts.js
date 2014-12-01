@@ -16,6 +16,8 @@ var discos = [];
 
 var n_discos = 5;
 
+var movimentos = [];
+
 var hanoi = new Hanoi(hanoi_canvas);
 
 window.addEventListener('resize', configurarHanoi, false);
@@ -71,7 +73,7 @@ function configurarHanoi() {
 	);
 
 	altura_disco = (n_discos <= 10) ? ((hanoi.torres[0].haste["altura"] * 0.95) / 10) :
-									  ((hanoi.torres[0].haste["altura"] * 0.95) / n_discos);
+									  ((hanoi.torres[0].haste["altura"]) / n_discos);
 
 	for (var i = n_discos-1; i >= 0; i--) {
 
@@ -87,7 +89,7 @@ function configurarHanoi() {
 
 	    cor = "#" + cor.toString(16);
 	    var x_disco = hanoi.torres[0].base["x"] + (((hanoi.torres[0].base["comprimento"] / n_discos)*(i)) / 2);
-	    var y_disco = hanoi.torres[0].base["y"] - ((i+1) * altura_disco);
+	    var y_disco = hanoi.torres[0].base["y"] - ((i+1) * altura_disco); //+ (i+1);
 
 		hanoi.discos.push(
 			new Disco(
@@ -96,7 +98,9 @@ function configurarHanoi() {
 				y_disco,
 				(hanoi.torres[0].base["comprimento"] / n_discos) * (n_discos-i),
 				altura_disco,
-				cor
+				cor,
+				0,
+				0
 			)
 		);
 	}
@@ -118,16 +122,29 @@ document.getElementById('btn_n_discos').onclick = function() {
 function resolverTorres(n, inicio, fim, auxiliar) {
 
 	if (n == 1) {
-		discos[0].sair(torres[inicio], torres[fim], torres, discos);
+		movimentos.push({disco: 1, torre_inicio: inicio, torre_fim: fim});
 		console.log("Disco 1 de " + inicio + " para " + fim);
 		return;
 	}
 
 	resolverTorres(n-1, inicio, auxiliar, fim);
-	discos[n-1].sair(torres[inicio], torres[fim], torres, discos);
+	movimentos.push({disco: n, torre_inicio: inicio, torre_fim: fim});
 	console.log("Disco " + n + " de " + inicio + " para " + fim);
 
 	resolverTorres(n-1, auxiliar, fim, inicio);
+}
 
-	desenharObjetos();
+function animar(i, movimentos) {
+
+	if ( i < movimentos.length ) {
+
+		hanoi.discos[movimentos[i].disco-1].sair(
+			hanoi.torres[movimentos[i].torre_inicio],
+			hanoi.torres[movimentos[i].torre_fim],
+			hanoi.torres,
+			hanoi.discos, 
+			function() { animar(i+1, movimentos); }
+		);
+
+	}
 }

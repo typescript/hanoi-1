@@ -60,8 +60,11 @@ Torre.prototype = {
 		 * Estilizando as bases
 		 */
 		this.context.fillStyle = '#5f3c24';
+		//this.context.strokeStyle = "#000000";
+    	//this.context.lineWidth   = 1;
 
-		this.context.fillRect(
+    	this.context.fillRect(
+		//this.context.strokeRect(
 			this.base["x"],
 			this.base["y"],
 			this.base["comprimento"],
