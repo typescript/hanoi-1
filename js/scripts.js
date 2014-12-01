@@ -12,8 +12,6 @@ var cor_branca = Math.pow(256, 3) - 1;
 var cor;
 var altura_disco;
 
-var discos = [];
-
 var n_discos = 5;
 
 var movimentos = [];
@@ -110,12 +108,22 @@ function configurarHanoi() {
 
 configurarHanoi();
 
+$('#btn_resolver').click(function(){
+	resolverTorres(n_discos, 0, 1, 2);
+	animar(0, movimentos);
+});
+
 document.getElementById('form_hanoi').onsubmit = function() {
 	return false;
 }
 
 document.getElementById('btn_n_discos').onclick = function() {
 	n_discos = document.getElementsByName('in_n_discos')[0].value;
+
+	if (n_discos > 15) {
+		n_discos = 15;
+	}
+
 	configurarHanoi();
 }
 

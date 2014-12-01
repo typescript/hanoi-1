@@ -60,6 +60,7 @@ Disco.prototype = {
 			this.y += this.vel_y;
 		} else {
 			this.vel_y = 0;
+			this.y = this.destino_y;
 			torre_inicio.qtd_discos--;
 			this.mover(torre_inicio, torre_fim, torres, discos, callback);
 			return;
@@ -100,6 +101,7 @@ Disco.prototype = {
 				this.x += this.vel_x;
 			} else {
 				this.vel_x = 0;
+				this.x = this.destino_x;
 				this.entrar(torre_inicio, torre_fim, torres, discos, callback);
 				return;
 			}
@@ -110,6 +112,7 @@ Disco.prototype = {
 				this.x += this.vel_x;
 			} else {
 				this.vel_x = 0;
+				this.x = this.destino_x;
 				this.entrar(torre_inicio, torre_fim, torres, discos, callback);
 				return;
 			}
@@ -143,6 +146,7 @@ Disco.prototype = {
 			this.y += this.vel_y;
 		} else {
 			this.vel_y = 0;
+			this.y = this.destino_y;
 
 			for (var i = 0; i < torres.length; i++) {
 				torres[i].desenhar();
