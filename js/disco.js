@@ -24,11 +24,8 @@ Disco.prototype = {
 	desenhar: function(context) {
 
 		this.context.fillStyle = this.cor;
-		//this.context.strokeStyle = "blue";
-    	//this.context.lineWidth   = 1;
 
     	this.context.fillRect(
-		//this.context.strokeRect(
 			this.x,
 			this.y,
 			this.comprimento,

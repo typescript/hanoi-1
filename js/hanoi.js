@@ -2,7 +2,7 @@
 function Hanoi(canvas, torres, discos, qtd) {
 
 	this.canvas = canvas;
-	this.context = this.canvas.getContext('2d');;
+	this.context = this.canvas.getContext('2d');
 	this.torres = torres;
 	this.discos = discos;
 
